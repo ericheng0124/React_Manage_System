@@ -1,0 +1,18 @@
+.product-span-left{
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.product-span-right{
+    font-size: 15px;
+    color: gray;
+}
+
+.product-img{
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    margin-right: 10px;
+}
+
