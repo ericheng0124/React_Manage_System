@@ -4,7 +4,8 @@ import logo from '../../assets/images/logo.png'
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {Menu} from 'antd';
 import items, {rootSubmenuKeys} from '../../config/nodeList'
-import memoryUtils from "../../utils/memoryUtils";
+// import memoryUtils from "../../utils/memoryUtils";
+import {useSelector} from "react-redux";
 
 
 const LeftNav = () => {
@@ -16,7 +17,11 @@ const LeftNav = () => {
 
   const [allKeys, setAllKeys] = useState([])
 
-  const menus = memoryUtils.user.role.menus
+  // const menus = memoryUtils.user.role.menus
+  // 使用redux获取menus
+  const menus = useSelector(state => state.user).role.menus
+
+
 
   // 根据登陆的user信息匹配对应的路由
   const getMenus = useCallback((items) => {

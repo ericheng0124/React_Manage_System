@@ -3,8 +3,8 @@
 *
 * */
 
-const loginData={
+const memoryUtils={
   user:{}
 };
 
-export default loginData
+export default memoryUtils

@@ -3,10 +3,12 @@ import styles from "./login.module.css"
 import logo from "../../assets/images/logo.png"
 import {Button, Form, Input, message} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {reqLogin} from "../../api";
 import {useNavigate} from "react-router-dom";
-import loginData from "../../utils/memoryUtils";
+import memoryUtils from "../../utils/memoryUtils";
 import localStore from "../../utils/storageUtils";
+import {usePostLoginMutation} from "../../store/loginApi";
+// import {reqLogin} from "../../api";
+
 
 /*
 *   登陆页面
@@ -15,25 +17,31 @@ import localStore from "../../utils/storageUtils";
 
 const Login = () => {
 
+
   const nav = useNavigate()
-  const user = loginData.user
-  useEffect(()=>{
-    if (user && user._id) {
-      nav('/')
-    }
-  },[nav,user])
+  const user = memoryUtils.user
+
+  // console.log('memory',user)
+
+
+
+  // 使用RTKQ获取用户信息
+  const [postLogin, isSuccess] = usePostLoginMutation()
 
 
   const onFinish = async (values) => {
     console.log('Success:', values);
     const {username, password} = values;
+
     try {
-      const result = await reqLogin(username, password)
-      if (result.status === 0) {
+      const result = await postLogin({username, password})
+      // if (result.data.status === 0) {
+      if (isSuccess) {
         message.success('登陆成功!')
-        const user = result.data
+        const user = result.data.data
+        console.log('user:', user)
         // 将user信息存储到内存中
-        loginData.user = user
+        memoryUtils.user = user
         // 存储到浏览器中
         localStore.saveUser(user)
         nav('/')
@@ -43,12 +51,19 @@ const Login = () => {
     } catch (err) {
       message.error(err)
     }
-  };
+  }
+
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 
+  useEffect(() => {
+    if (user && user._id) {
+      nav('/')
+    }
+
+  }, [nav, user])
 
   return (
 

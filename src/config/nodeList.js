@@ -38,9 +38,9 @@ const items = [
   getItem('用户管理', '用户管理', '/user', <UserOutlined/>),
   getItem('权限管理', '权限管理', '/role', <SafetyOutlined/>),
   getItem('图形图标', '图形图标', '/charts', <AreaChartOutlined/>, [
-    getItem('Bar', 'Bar', '/charts/bar', <BarChartOutlined/>),
-    getItem('Line', 'Line', '/charts/line', <LineChartOutlined/>),
-    getItem('Pie', 'Pie', '/charts/pie', <PieChartOutlined/>),
+    getItem('柱状图', '柱状图', '/charts/bar', <BarChartOutlined/>),
+    getItem('折线图', '折线图', '/charts/line', <LineChartOutlined/>),
+    getItem('饼图', '饼图', '/charts/pie', <PieChartOutlined/>),
   ])
 ]
 

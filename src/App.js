@@ -13,16 +13,18 @@ import Pie from "./pages/charts/pie";
 import ProductHome from "./pages/product/home";
 import ProductAddUpdate from "./pages/product/add-update";
 import ProductDetail from "./pages/product/detail";
-
 import {ConfigProvider} from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 // import 'antd/dist/antd.css';
 
+
 const App = () => {
+
   return (
       <ConfigProvider locale={zhCN}>
         <div style={{height: '100%', width: '100%'}}>
           <Routes>
+            <Route path={'/login'} element={<Login/>}></Route>
             <Route path={'/'} element={<Admin/>}>
               <Route path={'/home'} exact element={<Home/>}></Route>
               <Route path={'/products/category'} element={<Category/>}></Route>
@@ -40,7 +42,6 @@ const App = () => {
               <Route path={'/charts/pie'} element={<Pie/>}></Route>
               <Route path={'/'} element={<Navigate to={'/home'}/>}></Route>
             </Route>
-            <Route path={'/login'} element={<Login/>}></Route>
             <Route path={'*'} element={<Navigate to={'/login'}/>}/>
           </Routes>
         </div>
